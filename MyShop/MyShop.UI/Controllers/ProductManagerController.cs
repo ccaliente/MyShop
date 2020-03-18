@@ -3,7 +3,9 @@ using MyShop.Core.Models;
 using MyShop.Core.ViewModels;
 using MyShop.DataAccess.InMemory;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace MyShop.UI.Controllers
@@ -35,7 +37,7 @@ namespace MyShop.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create(Product product, HttpPostedFileBase file)
         {
             if (!ModelState.IsValid)
             {
@@ -43,6 +45,11 @@ namespace MyShop.UI.Controllers
             }
             else
             {
+                if (file != null)
+                {
+                    product.Image = product.Id + Path.GetExtension(file.FileName); //запазваме името на файла, който качваме като ид+иметона файла
+                    file.SaveAs(Server.MapPath("//Content//ProductImages//")+product.Image); //запазваме файла на физическия път 
+                }
                 context.Insert(product);
                 context.Commit();
 
@@ -69,7 +76,7 @@ namespace MyShop.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Product product, string Id)
+        public ActionResult Edit(Product product, string Id, HttpPostedFileBase file)
         {
             Product productToEdit = context.Find(Id);
 
@@ -83,10 +90,13 @@ namespace MyShop.UI.Controllers
                 {
                     return View(product);
                 }
-
+                if (file != null)
+                {
+                    productToEdit.Image = product.Id + Path.GetExtension(file.FileName); //запазваме името на файла, който качваме като ид+иметона файла
+                    file.SaveAs(Server.MapPath("//Content//ProductImages//") + productToEdit.Image); //запазваме файла на физическия път 
+                }
                 productToEdit.Category = product.Category;
                 productToEdit.Description = product.Description;
-                productToEdit.Image = product.Image;
                 productToEdit.Name = product.Name;
                 productToEdit.Price = product.Price;
 
