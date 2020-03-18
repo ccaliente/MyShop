@@ -1,11 +1,12 @@
 ﻿using MyShop.Core.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MyShop.Core.Contracts
 {
     public interface IRepository<T> where T : BaseEntity
     {
-        List<T> Collection();
+        IQueryable<T> Collection();
         void Commit();
         void Delete(string Id);
         T Find(string Id);
