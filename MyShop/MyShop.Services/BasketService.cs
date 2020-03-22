@@ -1,6 +1,7 @@
 ﻿using MyShop.Core;
 using MyShop.Core.Contracts;
 using MyShop.Core.Models;
+using MyShop.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,9 @@ using System.Web;
 
 namespace MyShop.Services
 {
-    public class BasketService
+    public class BasketService : IBasketService
     {
+
         IRepository<Product> ProdContext;
         IRepository<Basket> BasketContext;
 
@@ -97,6 +99,60 @@ namespace MyShop.Services
                 basket.BasketItems.Remove(item);
                 BasketContext.Commit();
             }
+        }
+
+        public List<BasketItemViewModel> GetBasketItems(HttpContextBase httpContext)
+        { 
+            Basket basket = GetBasket(httpContext, false);
+            if (basket != null)
+            {
+                var result = (from b in basket.BasketItems
+                              join p in ProdContext.Collection() on b.ProductId equals p.Id
+                              select new BasketItemViewModel()
+                              {
+                                  Id = b.Id,
+                                  Quantity = b.Quantity,
+                                  Name = p.Name,
+                                  Image = p.Image,
+                                  Price = p.Price
+                              }
+                              ).ToList();
+                return result;
+            }
+            else
+                return new List<BasketItemViewModel>();
+
+        }
+
+        public BasketSummaryViewModel GetBasketSummary(HttpContextBase httpContext)
+        {
+            Basket basket = GetBasket(httpContext, false);
+            BasketSummaryViewModel model = new BasketSummaryViewModel(0, 0);
+
+            if (basket != null)
+            {
+                int? basketCount = (from item in basket.BasketItems
+                                    select item.Quantity).Sum();
+
+                // decimal? означава, че променливата може да приема decimal или null
+                decimal? basketTotal = (from item in basket.BasketItems
+                                        join p in ProdContext.Collection() on item.ProductId equals p.Id
+                                        select item.Quantity * p.Price).Sum();
+
+                model.BasketCount = basketCount ?? 0;  //Ако basketCount има стойност присвоява нея ако не (??) , то връща 0.
+                model.BasketTotal = basketTotal ?? Decimal.Zero;
+
+                return model;
+                //foreach (var item in basket.BasketItems)
+                //{
+                //    int basketCount = 0;
+                //    basketCount = basketCount + item.Quantity;
+                //}
+
+            }
+            else
+                return model;
+
         }
     }
 }
