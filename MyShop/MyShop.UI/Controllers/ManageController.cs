@@ -18,6 +18,7 @@ namespace MyShop.UI.Controllers
 
         public ManageController()
         {
+            //Ako iskame razdavaneto na rolite na potrebitelite move da go napravim i tuk
         }
 
         public ApplicationSignInManager SignInManager

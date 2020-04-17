@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace MyShop.UI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class OrderManagerController : Controller
     {
         IOrderService orderService;
@@ -22,6 +23,12 @@ namespace MyShop.UI.Controllers
         {
             List<Order> orderList = orderService.GetOrderList();
             return View(orderList);
+        }
+
+        public ActionResult GetData()
+        {
+            List<Order> data = orderService.GetOrderList();
+            return Json( new { data=data}, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult UpdateOrder(string Id)

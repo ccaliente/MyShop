@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace MyShop.UI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductManagerController : Controller
     {
         IRepository<Product> context;

@@ -6,9 +6,11 @@ using System.Web.Mvc;
 
 namespace MyShop.UI.Controllers
 {
+    [Authorize(Roles="Admin")]
     public class AdminController : Controller
     {
         // GET: Admin
+        [Authorize]
         public ActionResult Index()
         {
             return View();

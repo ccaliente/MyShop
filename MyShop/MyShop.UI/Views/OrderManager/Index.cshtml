@@ -3,47 +3,113 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Surname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrderStatus)
-        </th>
-        <th></th>
-    </tr>
+<div class="col-md-12">
+    <table class="display" id="ordersList">
+        <thead>
+            <tr>
+                <th>
+                    CreatedAt
+                </th>
+                <th>
+                    FirstName
+                </th>
+                <th>
+                    Surname
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    OrderStatus
+                </th>
+                <th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Surname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderStatus)
-        </td>
-        <td>
-            @Html.ActionLink("ManageOrder", "UpdateOrder", new { id=item.Id }) |
-        </td>
-    </tr>
+                </th>
+            </tr>
+        </thead>
+        @*<tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedAt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Surname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderStatus)
+                </th>
+                <th></th>
+            </tr>*@
+        @*@foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderStatus)
+                    </td>
+                    <td>
+                        @Html.ActionLink("ManageOrder", "UpdateOrder", new { id=item.Id }) |
+                    </td>
+                </tr>
+            }*@
+
+    </table>
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <link href="~/Scripts/DataTable/css/jquery.dataTables.css" rel="stylesheet" />
+    <script src="~/Scripts/DataTable/js/jquery.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+    <script>
+        $(document).ready(function ()
+            {
+                $('#ordersList').DataTable({
+                    "ajax": {
+                    "type" : "GET" ,
+                    "url" : "@Url.Action("GetData","OrderManager")" ,
+                    "datatype" : "json"
+                    },
+                    "columns":
+                    [
+                    { "data" : "CreatedAt" , "render": function (data, type, row) {
+                            return moment(row.updatedDate).format('DD/MM/YYYY hh:mm:ss');}
+                    },
+                    { "data" : "FirstName" },
+                    { "data" : "Surname" },
+                    { "data" : "Email" },
+                    { "data": "OrderStatus" },
+                    { "data": "Id" , "render" : function ( data ) {
+                        return '<a class="btn btn-danger" onclick="Manage(\'' + data + '\')">Manage Order</a>';
+                        }}
+                    ]
+                });
+            });
+
+        function Manage( id ) {
+            var url = '@Url.Action("UpdateOrder", "OrderManager", new { id = "_id_" })';
+                window.location.href = url.replace('_id_', id);
+        }
+
+
+        //   var date = new Date(data);
+        //                var month = data.getMonth() + 1;
+        //return (month.toString().length > 1 ? month : "0" + month) + "/" + data.getDate() + "/" + data.getFullYear();
+
+    </script>
 }
-
-</table>
