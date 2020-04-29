@@ -22,103 +22,153 @@ namespace MyShop.UI.Controllers
         // GET: ProductManager
         public ActionResult Index()
         {
-            List<ProductCategory> productscat = context.Collection().ToList();
-            return View(productscat);
+            //List<ProductCategory> productscat = context.Collection().ToList();
+            return View();
         }
 
-        public ActionResult Create()
+        public ActionResult GetData()
         {
-            ProductCategory productcat = new ProductCategory();
-            return View(productcat);
+            List<ProductCategory> data = context.Collection().ToList();
+            return Json(new { data = data }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult AddOrEditPartial(string Id)
+        {
+            ProductCategory data = new ProductCategory();
+            data = context.Find(Id);
+            return View("AddOrEditPartial", data);
+            //return Json(new { data = data }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public ActionResult Create(ProductCategory pr)
+        public ActionResult AddOrEditPartial(ProductCategory pr)
         {
-            if (!ModelState.IsValid)
-                return View(pr);
-            else
+            bool status = false;
+            if (ModelState.IsValid)
             {
-                context.Insert(pr);
-                context.Commit();
+
+                var data = context.Find(pr.Id);
+                if (data != null)
+                {
+                    data.Category = pr.Category;
+                    context.Commit();
+                }
+                else
+                {
+                    context.Insert(pr);
+                    context.Commit();
+                }
 
                 return RedirectToAction("Index");
             }
+            return new JsonResult { Data = new { status = status } };
 
         }
 
-        public ActionResult Edit(string Id)
+        public JsonResult Delete(string Id)
         {
             ProductCategory productcat = new ProductCategory();
             productcat = context.Find(Id);
-            if (productcat == null)
+            if (productcat != null)
             {
-                return HttpNotFound();
-            }
-            else
-                return View(productcat);
-
-        }
-
-        [HttpPost]
-        public ActionResult Edit(Product pr, string Id)
-        {
-            ProductCategory prodcat = new ProductCategory();
-            prodcat = context.Find(Id);
-            if (prodcat == null)
-            {
-                return HttpNotFound();
-            }
-            else
-            {
-                if (!ModelState.IsValid)
-                    return View(pr);
-                else
-                {
-                    prodcat.Category = pr.Category;
-
-                    context.Commit();
-                    return RedirectToAction("Index");
-                }
-            }
-
-        }
-
-        public ActionResult Delete(string Id)
-        {
-            ProductCategory productcat = new ProductCategory();
-            productcat = context.Find(Id);
-            if (productcat == null)
-            {
-                return HttpNotFound();
-            }
-            else
-                return View(productcat);
-
-        }
-
-        [HttpPost]
-        [ActionName("Delete")]
-        public ActionResult Delete(ProductCategory pr, string Id)
-        {
-
-            ProductCategory prodcat = new ProductCategory();
-            prodcat = context.Find(Id);
-            if (prodcat == null)
-            {
-                return HttpNotFound();
-            }
-            else
-            {
-                if (!ModelState.IsValid)
-                    return View(pr);
-                else
+                if (ModelState.IsValid)
                 {
                     context.Delete(Id);
                     context.Commit();
-                    return RedirectToAction("Index");
                 }
             }
+            return Json("success", JsonRequestBehavior.AllowGet);
+
         }
+
+        //[HttpPost]
+        //public ActionResult Create(ProductCategory pr)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return View(pr);
+        //    else
+        //    {
+        //        context.Insert(pr);
+        //        context.Commit();
+
+        //        return RedirectToAction("Index");
+        //    }
+
+        //}
+
+        //public ActionResult Edit(string Id)
+        //{
+        //    ProductCategory productcat = new ProductCategory();
+        //    productcat = context.Find(Id);
+        //    if (productcat == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    else
+        //        return View(productcat);
+
+        //}
+
+        //[HttpPost]
+        //public ActionResult Edit(Product pr, string Id)
+        //{
+        //    ProductCategory prodcat = new ProductCategory();
+        //    prodcat = context.Find(Id);
+        //    if (prodcat == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    else
+        //    {
+        //        if (!ModelState.IsValid)
+        //            return View(pr);
+        //        else
+        //        {
+        //            prodcat.Category = pr.Category;
+
+        //            context.Commit();
+        //            return RedirectToAction("Index");
+        //        }
+        //    }
+
+        //}
+
+        //public ActionResult Delete(string Id)
+        //{
+        //    ProductCategory productcat = new ProductCategory();
+        //    productcat = context.Find(Id);
+        //    if (productcat == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    else
+        //        return View(productcat);
+
+        //}
+
+        //[HttpPost]
+        //[ActionName("Delete")]
+        //public ActionResult Delete(ProductCategory pr, string Id)
+        //{
+
+        //    ProductCategory prodcat = new ProductCategory();
+        //    prodcat = context.Find(Id);
+        //    if (prodcat == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    else
+        //    {
+        //        if (!ModelState.IsValid)
+        //            return View(pr);
+        //        else
+        //        {
+        //            context.Delete(Id);
+        //            context.Commit();
+        //            return RedirectToAction("Index");
+        //        }
+        //    }
+        //}
     }
 }

@@ -1,32 +1,114 @@
-﻿@model IEnumerable<MyShop.Core.Models.ProductCategory>
+﻿@model MyShop.Core.Models.ProductCategory
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@section scripts{
+    <script src="~/Scripts/jquery-3.5.0.min.js"></script>
+    <link href="~/Scripts/DataTable/css/jquery.dataTables.css" rel="stylesheet" />
+    <script src="~/Scripts/DataTable/js/jquery.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Category)
-        </th>
-        <th></th>
-    </tr>
+    <script>
+        var Popup, dataTable;
+        $(document).ready(function ()
+            {
+               dataTable = $('#TableCat').DataTable({
+                    "ajax": {
+                    "type" : "GET" ,
+                    "url" : "@Url.Action("GetData","ProductCategory")" ,
+                    "datatype" : "json"
+                    },
+                    "columns":
+                    [
+                    { "data" : "Category"},
+                    {
+                      "data": "Id", "render": function (data) {
+                             return '<a class="btn btn-danger" onclick="Delete(\'' + data + '\')" style="margin-right: 12px"><span class="glyphicon glyphicon-trash"></span>Delete</a><a data-toggle="modal" data-target="#myModal" class="btn btn-success" onclick="Edit(\'' + data + '\')" style="margin-right: 12px"><span class="glyphicon glyphicon-pencil"></span>Edit</a>';
+                      }
+                    }
+                    ],
+                    "language": {
+                        "processing": "<img src='https://gph.is/2gESFHh' />",
+                        "emptytable": "No data found, You may click on <b> Add New </b> button"
+                    },
+                });
+        });
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+        function Delete(Id) {
+            if (confirm("Are you really want to delete this record?"))
+            {
+                $.ajax({
+                    type : 'GET' ,
+                    url : '@Url.Action("Delete","ProductCategory")/' + Id ,
+                    datatype: 'json',
+                    "columns":
+                    [
+                    { "data" : "Category"}],
+                    success: function (response) {
+                        if (response == "success") {
+                            alert("Data updated successfully");
+                            location.reload();
+                        }
+                    }
+                });
+            }
+        }
+        function Edit(Id) {
+            if (confirm("Are you really want to change this record?"))
+            {
+                $.ajax({
+                    type : 'Get' ,
+                    url: '@Url.Action("AddOrEditPartial","ProductCategory")/' + Id,
+                    data: { Id: Id }
+                }).done(function(result) {
+                        $('#modbody').html(result);
+                });
+            }
+        }
+    </script>
 }
 
+
+<a data-toggle="modal" data-target="#myModal" class="btn btn-success" style="margin-bottom: 12px; margin-top:12px "><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New</a>
+@*<a data-toggle="modal" data-target="#myModal" class="btn btn-success" style="margin-bottom: 12px; margin-top:12px " onclick="addView()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New</a>*@
+
+<table id="TableCat" class="display">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    @*@foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                </td>
+            </tr>
+        }*@
+
 </table>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">ProductCategory</h4>
+            </div>
+            <div class="modal-body" id="modbody">
+                    @Html.Partial("AddOrEditPartial")            
+            </div>
+        </div>
+    </div>
+</div>
