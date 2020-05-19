@@ -1,0 +1,103 @@
+﻿@model MyShop.Core.Models.Customer
+
+@using (Html.BeginForm("UserPartial", "User", FormMethod.Post, new { encType = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    <table class="table col-md-12">
+        <h2>User Data</h2>
+        <tr>
+            <div class="form-group col-md-4">
+                <td>@Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                <td>
+                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                </td>
+
+            </div>
+            <div class="form-group col-md-4">
+                <td>@Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                <td>
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </td>
+            </div>
+            <div class="form-group col-md-4">
+                <td>@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                <td>
+                    @Html.DisplayFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </td>
+            </div>
+        </tr>
+        <tr>
+            <div class="form-group col-md-4">
+                <td>@Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                <td>
+                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                </td>
+            </div>
+            <div class="form-group col-md-4">
+                <td>@Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                <td>
+                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                </td>
+            </div>
+            <div class="form-group col-md-4">
+                <td>@Html.LabelFor(model => model.Street, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                <td>
+                    @Html.EditorFor(model => model.Street, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Street, "", new { @class = "text-danger" })
+                </td>
+            </div>
+        </tr>
+        <tr>
+            <div class="form-group col-md-4">
+                <td>@Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                <td>
+                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                </td>
+            </div>
+            <div class="form-group col-md-4">
+                <td>@Html.LabelFor(model => model.ZipCode, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                <td>
+                    @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+                </td>
+            </div>
+            <div class="form-group col-md-4">
+                <td></td>
+                <td></td>
+            </div>
+        </tr>
+        <tr>
+            <div class="form-group col-md-4">
+                <td></td>
+                <td></td>
+            </div>
+            <div class="form-group col-md-4">
+                <td></td>
+                <td></td>
+            </div>
+            <div class="form-group col-md-4">
+                <td></td>
+                <td>
+                    <div class="col-md-12 text-right">
+                        <button type="submit" class="btn btn-success" onclick="Update()">Update</button>
+                    </div>
+                </td>
+            </div>
+
+        </tr>
+    </table>
+    <div class="col-md-12">
+        @if (TempData["Success"] != null)
+        {
+            <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
+        }
+    </div>
+}

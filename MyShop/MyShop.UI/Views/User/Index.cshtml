@@ -1,0 +1,56 @@
+﻿@model MyShop.Core.Models.Customer
+
+@{
+    ViewBag.Title = "Index";
+}
+
+    <div class="col-md-12" style="background-color:#d9edf7; margin-top: 20px; margin-bottom: 20px; border-radius: 3px;">
+        @*<hr style="border: 1px solid #cecece;" />*@
+        <div class="col-md-3" style="margin-top: 25px; margin-bottom: 5px;">
+            <ul class="list-group">
+                <li class="list-group-item"><a onclick="LoadUserData()">Данни на потребителя</a></li>
+                <li class="list-group-item"><a onclick="LoadOrders()">Поръчки</a></li>
+                <li class="list-group-item"><a href="#">Данни за фактура</a></li>
+                <li class="list-group-item"><a href="#">Данни за дебитна карта</a></li>
+            </ul>
+        </div>
+        <div class="col-md-9 container rounded" style="border: 1px solid #cecece; border-radius: 3px; color: #31708f; background-color: white; margin-top: 25px; margin-bottom: 25px;" id="userdiv">
+            @*@Html.Partial("UserPartial")*@
+        </div>
+    </div>
+
+<script>
+     function LoadUserData() {
+            $.ajax({
+                    type : 'Get' ,
+                    url: '@Url.Action("UserPartial","User")',
+                    contentType: "text/html; charset=utf-8",
+                    success: function (data) {
+                    $('#userdiv').html(data);
+                    }
+                    });
+    }
+     function LoadOrders() {
+            $.ajax({
+                    type : 'Get' ,
+                    url: '@Url.Action("UserOrderPartial","User")',
+                    contentType: "text/html; charset=utf-8",
+                    success: function (data) {
+                    $('#userdiv').html(data);
+                    }
+                    });
+            }
+</script>
+@*<script>
+    function Update() {
+            $.ajax({
+                    type : 'POST' ,
+                    url: '@Url.Action("UserPartial","User")',
+                    contentType: "text/html; charset=utf-8",
+                    success: function (data) {
+                    $('#userdiv').html(data);
+                    }
+                    });
+            }
+
+</script>*@

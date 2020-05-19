@@ -23,6 +23,7 @@ namespace MyShop.DataAccess.SQL
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<InvoiceData> InvoiceData { get; set; }
 
 
     }

@@ -9,7 +9,7 @@ namespace MyShop.Core.Models
 {
     public class ProductCategory : BaseEntity
     {
-        [Required(ErrorMessage="PLease fill category")]
+        [Required(ErrorMessage="Please fill category")]
         public string Category { get; set; }
 
     }
