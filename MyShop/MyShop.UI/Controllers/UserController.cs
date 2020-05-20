@@ -14,12 +14,16 @@ namespace MyShop.UI.Controllers
         IRepository<Customer> contextC;
         IRepository<InvoiceData> contextInv;
         IOrderService orderService;
+        IRepository<Order> contextOrder;
+        IRepository<OrderItem> itemContext;
 
-        public UserController(IRepository<Customer> customerContext, IRepository<InvoiceData> invoiceContext, IOrderService OrderService)
+        public UserController(IRepository<Customer> customerContext, IRepository<InvoiceData> invoiceContext, IOrderService OrderService, IRepository<Order> ContextOrder, IRepository<OrderItem> ItemContext)
         {
             this.contextC = customerContext;
             this.contextInv = invoiceContext;
             this.orderService = OrderService;
+            this.contextOrder = ContextOrder;
+            this.itemContext = ItemContext;
         }
 
         // GET: User
@@ -64,8 +68,35 @@ namespace MyShop.UI.Controllers
         public ActionResult UserOrderPartial()
         {
             List<Order> data = orderService.GetOrderList();
-            return PartialView("UserOrderPartial", data);
+            return PartialView("UserOrderPartial", data.Where(o => o.Email == User.Identity.Name));
             //return Json(new { data = data }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult Delete(string Id)
+        {
+            Order or = contextOrder.Find(Id);
+
+            if (or.OrderStatus != "Order Shipped")
+            {
+                orderService.DeleteOrder(Id);
+                orderService.GetOrderList().Where(o => o.Email == User.Identity.Name);
+                return Json("success", JsonRequestBehavior.AllowGet);
+            }
+            else
+                return Json("not success", JsonRequestBehavior.AllowGet);
+
+        }
+
+        public decimal OrderSummary(string Id)
+        {
+            List<Order> order = contextOrder.Collection().Where(o => o.Id==Id).ToList();
+            List<OrderItem> items = itemContext.Collection().Where(i => i.OrederId== Id).ToList();
+            decimal OrderTotal = (from item in order
+                                   join p in items on item.Id equals p.OrederId
+                                   select p.Quantity * p.Price).Sum();
+
+            return OrderTotal;
         }
 
     }

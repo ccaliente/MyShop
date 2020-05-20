@@ -15,5 +15,7 @@ namespace MyShop.Core.Contracts
         Order GetOrder(string Id);
         void UpdateOrder(Order updatedOrder);
 
+        void DeleteOrder(string Id);
+
     }
 }

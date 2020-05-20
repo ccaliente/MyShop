@@ -12,9 +12,11 @@ namespace MyShop.Services
     public class OrderService : IOrderService
     {
         IRepository<Order> orderContext;
-        public OrderService(IRepository<Order> OrderContext)
+        IRepository<OrderItem> orderItemContext; //200520
+        public OrderService(IRepository<Order> OrderContext, IRepository<OrderItem> OrderItemContext)
         {
             this.orderContext = OrderContext;
+            this.orderItemContext = OrderItemContext;
         
         }
         public void CreateOrder(Order baseOrder, List<BasketItemViewModel> basketItems)
@@ -23,6 +25,7 @@ namespace MyShop.Services
             {
                 baseOrder.OrderItems.Add(new OrderItem()
                 {
+                    OrederId = baseOrder.Id,
                     ProductId = item.Id,
                     ProductName = item.Name,
                     Price = item.Price,
@@ -49,6 +52,20 @@ namespace MyShop.Services
         {
             orderContext.Update(updatedOrder);
             orderContext.Commit();
+        }
+
+        public void DeleteOrder(string Id)
+        {
+            List<OrderItem> order = orderItemContext.Collection().Where(o => o.OrederId == Id).ToList();
+            foreach (var item in order)
+            {
+                orderItemContext.Delete(item.Id);
+                orderItemContext.Commit();
+            }
+
+            orderContext.Delete(Id);
+            orderContext.Commit();
+
         }
     }
 }

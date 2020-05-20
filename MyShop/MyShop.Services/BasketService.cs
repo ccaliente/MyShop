@@ -143,11 +143,6 @@ namespace MyShop.Services
                 model.BasketTotal = basketTotal ?? Decimal.Zero;
 
                 return model;
-                //foreach (var item in basket.BasketItems)
-                //{
-                //    int basketCount = 0;
-                //    basketCount = basketCount + item.Quantity;
-                //}
 
             }
             else
