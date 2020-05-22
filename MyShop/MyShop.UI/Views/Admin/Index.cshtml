@@ -4,19 +4,19 @@
     ViewBag.Title = "Admin";
 }
 
-<h2>Admin Pages</h2>
+    <div class="col-md-12" style="background-color: white; padding-top: 20px; padding-bottom: 20px; border-radius: 3px;">
+        <div class="col-md-6">
+            <h4>Product Managment</h4>
+            <div class="list-group">
+                @Html.ActionLink("ProductCategories", "Index", "ProductCategory", null, new { @class = "list-group-item" })
+                @Html.ActionLink("Product", "Index", "ProductManager", null, new { @class = "list-group-item" })
+            </div>
+        </div>
 
-<div class="col-md-6">
-    <h4>Product Managment</h4>
-    <div class="list-group">
-        @Html.ActionLink("ProductCategories", "Index", "ProductCategory", null, new { @class = "list-group-item" })
-        @Html.ActionLink("Product", "Index", "ProductManager", null, new { @class = "list-group-item" })
+        <div class="col-md-6">
+            <h4>Order Managment</h4>
+            <div class="list-group">
+                @Html.ActionLink("Orders", "Index", "OrderManager", null, new { @class = "list-group-item" })
+            </div>
+        </div>
     </div>
-</div>
-
-<div class="col-md-6">
-    <h4>Order Managment</h4>
-    <div class="list-group">
-        @Html.ActionLink("Orders", "Index", "OrderManager", null, new { @class = "list-group-item" })
-    </div>
-</div>

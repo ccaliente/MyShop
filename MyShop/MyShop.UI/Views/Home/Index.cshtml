@@ -4,48 +4,33 @@
     ViewBag.Title = "Home Page";
 }
 
+<div class="col-md-12" style="background-color: white; padding-top: 20px; padding-bottom: 20px; border-radius: 3px;">
     <div class="col-md-2">
         <h4>Filter By Category</h4>
         <div class="list-group">
-            @Html.ActionLink("All", "Index", null, new { @class = Request["Category"]==null? "list-group-item active" : "list-group-item"})
+            @Html.ActionLink("All", "Index", null, new { @class = Request["Category"] == null ? "list-group-item active" : "list-group-item" })
             @foreach (var cat in Model.ProductCategories)
             {
-                @Html.ActionLink(cat.Category, "Index", new { Category = cat.Category }, new { @class = Request["Category"]==cat.Category? "list-group-item active" : "list-group-item"})
+                @Html.ActionLink(cat.Category, "Index", new { Category = cat.Category }, new { @class = Request["Category"] == cat.Category ? "list-group-item active" : "list-group-item" })
             }
         </div>
     </div>
-    
+
     <div class="col-md-10">
         @foreach (var item in Model.Products)
         {
 
-        <div class="card col-md-3" style="height:400px; margin: 15px; padding: 10px; border: solid thin whitesmoke">
-            <img class="card-img-top" style=" height:200px ; width: 245px" src="~/Content/ProductImages/@item.Image" />
-            <div class="card-body">
-                <h5 class="card-title"><strong>@Html.ActionLink(item.Name, "Details", new { Id = item.Id })</strong></h5>
-                <p class="card-text"><h4>@item.Price</h4></p>
-                <a href="@Url.Action("AddToBasket", "Basket", new{Id=item.Id})" class="btn btn-primary">Add To Basket</a>
+            <div class="card col-md-3" style="height:400px; margin: 15px; padding: 10px; border: solid thin whitesmoke">
+                <img class="card-img-top" style=" max-width:100%; height:200px;" src="~/Content/ProductImages/@item.Image" />
+                @*<img class="card-img-top" style=" height:200px ; width: 245px" src="~/Content/ProductImages/@item.Image" />*@
+                <div class="card-body">
+                    <h5 class="card-title"><strong>@Html.ActionLink(item.Name, "Details", new { Id = item.Id })</strong></h5>
+                    <p class="card-text"><h4>@item.Price</h4></p>
+                    <a href="@Url.Action("AddToBasket", "Basket", new{Id=item.Id})" class="btn btn-primary">Add To Basket</a>
+                </div>
             </div>
-        </div>
-
-            //padding: 10px;
-            @*<div class="col-md-3" style="height:400px;  margin: 15px; border: solid thin whitesmoke ">
-                <div class="col-md-12">
-                    <img id="img_align" class="img" style=" height:200px ; width: 200px" src="~/Content/ProductImages/@item.Image" />
-                </div>
-                <div class="col-md-12">
-                    <strong>@Html.ActionLink(item.Name, "Details", new { Id = item.Id })</strong>
-                </div>
-                <div class="col-md-12">
-                    <p>@item.Description</p>
-                </div>
-                <div class="col-md-12">
-                    <h4>@item.Price</h4>
-                </div>
-                <div class="col-md-12">
-                    <a href="@Url.Action("AddToBasket", "Basket", new{Id=item.Id})" class="btn btn-default">Add To Basket</a>
-                </div>
-            </div>*@
         }
     </div>
-<div class="cold-md-12 clearfix"/>
+    @*<div class="cold-md-12 clearfix" />
+        </div>*@
+</div>

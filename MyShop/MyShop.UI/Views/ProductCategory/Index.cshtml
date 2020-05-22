@@ -25,7 +25,7 @@
                     { "data" : "Category"},
                     {
                       "data": "Id", "render": function (data) {
-                             return '<a class="btn btn-danger" onclick="Delete(\'' + data + '\')" style="margin-right: 12px"><span class="glyphicon glyphicon-trash"></span>Delete</a><a data-toggle="modal" data-target="#myModal" class="btn btn-success" onclick="Edit(\'' + data + '\')" style="margin-right: 12px"><span class="glyphicon glyphicon-pencil"></span>Edit</a>';
+                             return '<a class="btn btn-danger" onclick="Delete(\'' + data + '\')" style="margin-right: 12px"><span class="glyphicon glyphicon-trash" style=" margin-right: 2px;"></span>Delete</a><a data-toggle="modal" data-target="#myModal" class="btn btn-success" onclick="Edit(\'' + data + '\')" style="margin-right: 12px"><span class="glyphicon glyphicon-pencil" style=" margin-right: 2px;"></span>Edit</a>';
                       }
                     }
                     ],
@@ -70,45 +70,35 @@
     </script>
 }
 
+<div class="col-md-12" style="background-color: white; padding-top: 20px; padding-bottom: 20px; border-radius: 3px;">
+    <a data-toggle="modal" data-target="#myModal" class="btn btn-success" style="margin-bottom: 12px; margin-top:12px "><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New</a>
 
-<a data-toggle="modal" data-target="#myModal" class="btn btn-success" style="margin-bottom: 12px; margin-top:12px "><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New</a>
-@*<a data-toggle="modal" data-target="#myModal" class="btn btn-success" style="margin-bottom: 12px; margin-top:12px " onclick="addView()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New</a>*@
-
-<table id="TableCat" class="display">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-
-            </th>
-        </tr>
-    </thead>
-    @*@foreach (var item in Model) {
+    <table id="TableCat" class="display">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category)
+                </th>
+                <th>
+                </th>
             </tr>
-        }*@
+        </thead>
+    </table>
 
-</table>
-
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">ProductCategory</h4>
-            </div>
-            <div class="modal-body" id="modbody">
-                    @Html.Partial("AddOrEditPartial")            
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">ProductCategory</h4>
+                </div>
+                <div class="modal-body" id="modbody">
+                    @Html.Partial("AddOrEditPartial")
+                </div>
             </div>
         </div>
     </div>
+
+    @Html.ActionLink("Back to List", "Index", "Admin")
 </div>
+

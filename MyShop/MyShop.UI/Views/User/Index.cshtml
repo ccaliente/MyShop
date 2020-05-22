@@ -4,18 +4,16 @@
     ViewBag.Title = "Index";
 }
 
-    <div class="col-md-12" style="background-color:#d9edf7; margin-top: 20px; margin-bottom: 20px; border-radius: 3px;">
-        @*<hr style="border: 1px solid #cecece;" />*@
+    <div class="col-md-12" style="background-color:  #ffc107; color: #006699; margin-top: 20px; margin-bottom: 20px; border-radius: 3px;">
         <div class="col-md-3" style="margin-top: 25px; margin-bottom: 5px;">
-            <ul class="list-group">
-                <li class="list-group-item"><a onclick="LoadUserData()">User Data</a></li>
-                <li class="list-group-item"><a onclick="LoadOrders()">Orders</a></li>
-                <li class="list-group-item"><a href="#">Invoice Data</a></li>
-                <li class="list-group-item"><a href="#">Payment Data</a></li>
-            </ul>
+            <div class="list-group" style="font-weight: bold;">
+                <div class="list-group-item" onclick="LoadUserData()">User Data</div>
+                <div class="list-group-item" onclick="LoadOrders()">Orders</div>
+                <div class="list-group-item" >Invoice Data</div>
+                <div class="list-group-item" >Payment Data</div>
+            </div>
         </div>
         <div class="col-md-9 container rounded" style="border: 1px solid #cecece; border-radius: 3px; color: #31708f; background-color: white; margin-top: 25px; margin-bottom: 25px;" id="userdiv">
-            @*@Html.Partial("UserPartial")*@
         </div>
     </div>
 

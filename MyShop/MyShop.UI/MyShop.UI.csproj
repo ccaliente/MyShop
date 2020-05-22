@@ -213,6 +213,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\MainImages\2019-07-23-ratgeber-autoservice-1592x900.jpg" />
+    <Content Include="Content\MainImages\bhanu.jpg" />
+    <Content Include="Content\MainImages\cover.jpg" />
+    <Content Include="Content\MainImages\Interior_of_a_modern_warehouse_2500w.jpg" />
+    <Content Include="Content\MainImages\role-software-intelligence-management-consultancy.jpeg" />
+    <Content Include="Content\MainImages\shutterstock_657337522-e1517327882481.jpg" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -479,6 +485,8 @@
     <Content Include="Views\User\UserPartial.cshtml" />
     <Content Include="Views\User\View.cshtml" />
     <Content Include="Views\User\UserOrderPartial.cshtml" />
+    <Content Include="Views\User\OrderDetails.cshtml" />
+    <Content Include="Views\User\OrderItems.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

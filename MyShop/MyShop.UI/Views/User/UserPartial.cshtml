@@ -27,7 +27,6 @@
                 <td>@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })</td>
                 <td>
                     @Html.DisplayFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </td>
             </div>
         </tr>
@@ -66,7 +65,6 @@
                 <td>@Html.LabelFor(model => model.ZipCode, htmlAttributes: new { @class = "control-label col-md-2" })</td>
                 <td>
                     @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
                 </td>
             </div>
             <div class="form-group col-md-4">
@@ -87,7 +85,7 @@
                 <td></td>
                 <td>
                     <div class="col-md-12 text-right">
-                        <button type="submit" class="btn btn-success" onclick="Update()">Update</button>
+                        <button type="submit" class="btn btn-success" onclick="Validation()">Update</button>
                     </div>
                 </td>
             </div>
@@ -101,3 +99,12 @@
         }
     </div>
 }
+<script>
+    var Validation = function () {
+        debugger
+        var data = $("formsubmit").serialize;
+        if (!$("formsubmit").valid()) {
+            return false;
+        }
+    }
+</script>

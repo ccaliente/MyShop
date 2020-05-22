@@ -1,51 +1,56 @@
 ﻿@model IEnumerable<MyShop.Core.Models.Order>
+    <div class="col-md-12" style="background-color: white; padding-top: 20px; padding-bottom: 20px; border-radius: 3px;">
 
-<h2>Orders</h2>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrderStatus)
-        </th>
-        <th>
-            Total
-        </th>
-        <th></th>
-        <th></th>
-    </tr>
+        <h2>Orders</h2>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedAt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderStatus)
+                </th>
+                <th>
+                    Total
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
 
-@foreach (var item in Model)
-{
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Id)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.CreatedAt)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.OrderStatus)
-    </td>
-    <td>
-        @{
-           Html.RenderAction("OrderSummary", "User", new { Id = item.Id });
-        }
-    </td>
-    <td>
-        <a class="btn btn-success" onclick="Details('@item.Id')" style="margin-right: 12px"><span class="glyphicon glyphicon-list-alt"></span>Details</a>
-    </td>
-    <td>
-        <a class="btn btn-danger" onclick="Delete('@item.Id')" style="margin-right: 12px"><span class="glyphicon glyphicon-trash"></span>Cancel Order</a>
-    </td>
-</tr>
-}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderStatus)
+                    </td>
+                    <td>
+                        @{
+                            Html.RenderAction("OrderSummary", "User", new { Id = item.Id });
+                        }
+                    </td>
+                    <td>
+                        <a class="btn btn-success" onclick="Details('@item.Id')" style="margin-right: 12px"><span class="glyphicon glyphicon-list-alt" style=" margin-right: 2px;"></span>Details</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" onclick="Delete('@item.Id')" style="margin-right: 12px"><span class="glyphicon glyphicon-trash" style=" margin-right: 2px;"></span>Cancel Order</a>
+                    </td>
+                </tr>
+            }
 
-</table>
+        </table>
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
 <script>
     function Delete(id) {
             if (confirm("Are you really want to cancel this order?"))
@@ -67,5 +72,9 @@
                     }
                 });
             }
-        }
-</script>
+    }
+    function Details( id ) {
+            var url = '@Url.Action("OrderDetails", "User", new { Id = "_id_" })';
+                window.location.href = url.replace('_id_', id);
+     }
+        </script>

@@ -99,5 +99,11 @@ namespace MyShop.UI.Controllers
             return OrderTotal;
         }
 
+        public ActionResult OrderDetails(string Id)
+        {
+            Order order = orderService.GetOrder(Id);
+            return View(order);
+        }
+
     }
 }

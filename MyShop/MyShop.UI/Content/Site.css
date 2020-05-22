@@ -25,3 +25,17 @@ textarea {
 #img_align img {
     display: block;
 }
+#img {
+    position: relative;
+    margin-left: 1px;
+
+}
+#mybody {
+    padding-top: 1px;
+}
+#mycont {
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
