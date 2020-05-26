@@ -7,13 +7,16 @@
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <link href="~/Scripts/DataTable/css/jquery.dataTables.css" rel="stylesheet" />
     <script src="~/Scripts/DataTable/js/jquery.dataTables.js"></script>
+    <link href="~/Scripts/DataTable/Responsive-2.2.5/css/responsive.dataTables.css" rel="stylesheet" />
+    <script src="~/Scripts/DataTable/Responsive-2.2.5/js/dataTables.responsive.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
     <script>
         var dataTable;
         $(document).ready(function ()
             {
-               dataTable = $('#TableProd').DataTable({
+            dataTable = $('#TableProd').DataTable({
+                    "responsive": "true",
                     "ajax": {
                     "type" : "GET" ,
                     "url" : "@Url.Action("GetData","ProductManager")" ,
@@ -85,7 +88,7 @@
 <div class="col-md-12" style="background-color: white; padding-top: 20px; padding-bottom: 20px; border-radius: 3px;">
     <a data-toggle="modal" data-target="#myModal" class="btn btn-success" style="margin-bottom: 12px; margin-top:12px "><span class="glyphicon glyphicon-plus" aria-hidden="true" style=" margin-right: 2px;"></span> Add New</a>
 
-    <table id="TableProd" class="table">
+    <table id="TableProd" class="table" style="width: 100%;">
         <thead>
             <tr>
                 <th>

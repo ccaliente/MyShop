@@ -8,13 +8,16 @@
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <link href="~/Scripts/DataTable/css/jquery.dataTables.css" rel="stylesheet" />
     <script src="~/Scripts/DataTable/js/jquery.dataTables.js"></script>
+    <link href="~/Scripts/DataTable/Responsive-2.2.5/css/responsive.dataTables.css" rel="stylesheet" />
+    <script src="~/Scripts/DataTable/Responsive-2.2.5/js/dataTables.responsive.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
     <script>
         var Popup, dataTable;
         $(document).ready(function ()
             {
-               dataTable = $('#TableCat').DataTable({
+            dataTable = $('#TableCat').DataTable({
+                    "responsive": "true",
                     "ajax": {
                     "type" : "GET" ,
                     "url" : "@Url.Action("GetData","ProductCategory")" ,
@@ -70,10 +73,11 @@
     </script>
 }
 
+
 <div class="col-md-12" style="background-color: white; padding-top: 20px; padding-bottom: 20px; border-radius: 3px;">
     <a data-toggle="modal" data-target="#myModal" class="btn btn-success" style="margin-bottom: 12px; margin-top:12px "><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New</a>
 
-    <table id="TableCat" class="display">
+    <table  id="TableCat" class="display" style="width: 100%;">
         <thead>
             <tr>
                 <th>
@@ -85,20 +89,20 @@
         </thead>
     </table>
 
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">ProductCategory</h4>
-                </div>
-                <div class="modal-body" id="modbody">
-                    @Html.Partial("AddOrEditPartial")
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">ProductCategory</h4>
+                    </div>
+                    <div class="modal-body" id="modbody">
+                        @Html.Partial("AddOrEditPartial")
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    @Html.ActionLink("Back to List", "Index", "Admin")
+        @Html.ActionLink("Back to List", "Index", "Admin")
 </div>
 

@@ -4,12 +4,15 @@
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <link href="~/Scripts/DataTable/css/jquery.dataTables.css" rel="stylesheet" />
     <script src="~/Scripts/DataTable/js/jquery.dataTables.js"></script>
+    <link href="~/Scripts/DataTable/Responsive-2.2.5/css/responsive.dataTables.css" rel="stylesheet" />
+    <script src="~/Scripts/DataTable/Responsive-2.2.5/js/dataTables.responsive.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
     <script>
         $(document).ready(function ()
             {
-                $('#ordersList').DataTable({
+            $('#ordersList').DataTable({
+                    "responsive": "true",
                     "ajax": {
                     "type" : "GET" ,
                     "url" : "@Url.Action("GetData","OrderManager")" ,
@@ -39,7 +42,7 @@
     </script>
 }
 <div class="col-md-12" style="background-color: white; padding-top: 20px; padding-bottom: 20px; border-radius: 3px;">
-    <table class="display" id="ordersList">
+    <table class="display" id="ordersList" style="width: 100%;">
         <thead>
             <tr>
                 <th>

@@ -1,0 +1,39 @@
+﻿@model MyShop.Core.ViewModels.ProductListViewModel
+
+<div class="col-md-12">
+    @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+    {
+        <div class="col-md-2 col-sm-12">
+            @Html.Label("Elements in page")
+        </div>
+        <div class="col-md-2 col-sm-12">
+            @Html.DropDownList("list", ViewData["list"] as SelectList, new { @class = "form-control" })
+        </div>
+
+        <div class="col-md-7 col-sm-12" >
+               @Html.TextBox("Search", null, new { @class = "form-control", Id = "Search" })
+        </div>
+        <div class="col-md-1 col-sm-12">
+            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+        </div>
+     }
+</div>
+<div class="col-md-12">
+    <hr />
+</div>
+
+<div class="col-md-11">
+@foreach (var item in Model.Products)
+{
+
+    <div class="card col-md-3" style="height:400px; margin: 15px; padding: 10px; border: solid thin whitesmoke">
+        <img class="card-img-top" style=" max-width:100%; height:200px;" src="~/Content/ProductImages/@item.Image" />
+        @*<img class="card-img-top" style=" height:200px ; width: 245px" src="~/Content/ProductImages/@item.Image" />*@
+        <div class="card-body">
+            <h5 class="card-title"><strong>@Html.ActionLink(item.Name, "Details", new { Id = item.Id })</strong></h5>
+            <p class="card-text"><h4>@item.Price</h4></p>
+            <a href="@Url.Action("AddToBasket", "Basket", new{Id=item.Id})" class="btn btn-primary">Add To Basket</a>
+        </div>
+    </div>
+}
+</div>

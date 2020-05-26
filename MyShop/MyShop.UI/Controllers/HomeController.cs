@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace MyShop.UI.Controllers
 {
@@ -20,10 +21,19 @@ namespace MyShop.UI.Controllers
             productCategories = prodcatContext;
         }
 
-        public ActionResult Index(string Category=null)
+        public ActionResult Index(string Search, int? i, string Category = null)
         {
             List<Product> products;
             List<ProductCategory> prodCat = productCategories.Collection().ToList();
+            var list = new SelectList(new[]
+            {
+                new { ID = "1", Name = "10" },
+                new { ID = "2", Name = "15" },
+                new { ID = "3", Name = "20" },
+            },
+            "ID", "Name", 1);
+
+            ViewData["list"] = list;
 
             if (Category == null)
             {
@@ -37,6 +47,10 @@ namespace MyShop.UI.Controllers
             ProductListViewModel model = new ProductListViewModel();
             model.Products = products;
             model.ProductCategories = prodCat;
+
+            int pageSize = 5;
+            int pageNumber = (i ?? 1);
+
             return View(model);
         }
 
