@@ -226,6 +226,7 @@
     <Content Include="Content\MainImages\rsz_hospitality_insights_strategic_management_accounting.jpg" />
     <Content Include="Content\MainImages\rsz_interior_of_a_modern_warehouse_2500w.jpg" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Slider.js" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -519,6 +520,7 @@
     <Content Include="Views\User\OrderDetails.cshtml" />
     <Content Include="Views\User\OrderItems.cshtml" />
     <Content Include="Views\Home\HomePartial.cshtml" />
+    <Content Include="Views\Home\FilterProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

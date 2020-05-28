@@ -1,0 +1,21 @@
+﻿@model MyShop.Core.ViewModels.FilterProductsViewModel
+@using PagedList.Mvc;
+@using PagedList;
+@foreach (var item in Model.Products)
+{
+
+    <div class="card col-md-3" style="height:400px; margin: 15px; padding: 10px; border: solid thin whitesmoke">
+        <img class="card-img-top" style=" max-width:100%; height:200px;" src="~/Content/ProductImages/@item.Image" />
+        <div class="card-body">
+            <h5 class="card-title"><strong>@Html.ActionLink(item.Name, "Details", new { Id = item.Id })</strong></h5>
+            <p class="card-text"><h4>@item.Price</h4></p>
+            <a href="@Url.Action("AddToBasket", "Basket", new{Id=item.Id})" class="btn btn-primary">Add To Basket</a>
+        </div>
+    </div>
+}
+<div class="col-md-12">
+    Page: @(Model.Products.PageCount < Model.Products.PageNumber ? 0 : Model.Products.PageNumber)/@Model.Products.PageCount
+
+    @Html.PagedListPager(Model.Products, page => Url.Action("Index",
+    new { page, pageSize = ViewBag.psize }))
+</div>
