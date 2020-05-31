@@ -29,7 +29,7 @@ namespace MyShop.Services
             return min;
         }
 
-        public List<Product> SearchProducts(decimal? minPrice, decimal? maxPrice, string Category = null)
+        public List<Product> SearchProducts(decimal? minPrice, decimal? maxPrice, string Category = null, string Search = null)
         {
             List<Product> prod = new List<Product>();
             if (Category == null)
@@ -46,7 +46,11 @@ namespace MyShop.Services
                 prod = prod.Where(p => p.Price>=minPrice).ToList();
             if (maxPrice.HasValue)
                 prod = prod.Where(p => p.Price <= maxPrice).ToList();
-
+            if (!String.IsNullOrEmpty(Search))
+            {
+                prod = prod.Where(pr => pr.Name.ToUpper().Contains(Search.ToUpper())
+                    || pr.Name.ToUpper().Contains(Search.ToUpper())).OrderBy(pr => pr.Id).ToList();
+            }
             return prod;
 
         }

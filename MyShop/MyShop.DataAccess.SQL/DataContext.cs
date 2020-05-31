@@ -25,6 +25,8 @@ namespace MyShop.DataAccess.SQL
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<InvoiceData> InvoiceData { get; set; }
 
+        public DbSet<Comment> Comments { get; set; }
+
 
     }
 }

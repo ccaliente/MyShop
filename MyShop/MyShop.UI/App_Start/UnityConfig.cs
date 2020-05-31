@@ -59,6 +59,7 @@ namespace MyShop.UI
             container.RegisterType<IOrderService, OrderService>();
             container.RegisterType<IRepository<InvoiceData>, SQLRepository<InvoiceData>>();
             container.RegisterType<IProductService, ProductService>();
+            container.RegisterType<IRepository<Comment>, SQLRepository<Comment>>();
 
         }
     }

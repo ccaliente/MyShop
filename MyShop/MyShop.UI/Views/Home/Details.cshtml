@@ -3,43 +3,81 @@
 @{
     ViewBag.Title = Model.Name +" "+"Details";
 }
+    <div class="col-md-12" style="background-color: white; padding-top: 20px; padding-bottom: 20px; border-radius: 3px;">
+        <h2>@Html.DisplayFor(model => model.Name)</h2>
+        <div>
+            <hr />
+            <div class="col-md-2">
+                <img class="img-responsive" style="height:250px" src="~/Content/ProductImages/@Model.Image" />
+            </div>
+            <div class="col-md-10">
 
-<h2>@Html.DisplayFor(model => model.Name)</h2>
-<div>
-    <hr />
-    <div class="col-md-2">
-        <img class="img-responsive" style="height:250px" src="~/Content/ProductImages/@Model.Image" />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Description)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Price)
+                    </dd>
+                    <dt></dt>
+                    <dd><a href="@Url.Action("AddToBasket", "Basket", new{Id=Model.Id})" class="btn btn-primary">Add To Basket</a></dd>
+                    <dd> @Html.ActionLink("Back to List", "Index")</dd>
+                </dl>
+            </div>
+        </div>
+        <div class="cold-md-12  clearfix" />
+        <div class="col-md-12"><h3>Review</h3></div>
+        <div class="col-md-12" style="border: solid thin #dddddd; border-radius: 3px; padding-top: 20px;">
+            <div class="card">
+                @*<div class="card-header">
+                    gfdfgfd
+                </div>*@
+                <div class="card-body">
+                    <blockquote class="blockquote mb-3">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                        <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                    </blockquote>
+                </div>
+                <hr>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                        <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                    </blockquote>
+                </div>
+                <hr>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                        <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                    </blockquote>
+                </div>
+                <hr>
+                <form>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Write Your Comment:</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="max-width: 80%; margin-bottom: 15px;"></textarea>
+                        <button class="btn btn-success">Leave Review</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="col-md-10">
-
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Description)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Description)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Price)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Price)
-            </dd>
-            <dt></dt>
-            <dd><a href="@Url.Action("AddToBasket", "Basket", new{Id=Model.Id})" class="btn btn-default">Add To Basket</a></dd>
-            <dd> @Html.ActionLink("Back to List", "Index")</dd>
-        </dl>
-    </div>
-</div>
-<div class="cold-md-12 clearfix" />
+       

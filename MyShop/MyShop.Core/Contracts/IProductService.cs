@@ -13,7 +13,7 @@ namespace MyShop.Core.Contracts
 
         decimal GetMaxPrice();
 
-        List<Product> SearchProducts( decimal? minPrice, decimal? maxPrice, string Category = null);
+        List<Product> SearchProducts(decimal? minPrice, decimal? maxPrice, string Category = null, string Search = null);
 
     }
 }

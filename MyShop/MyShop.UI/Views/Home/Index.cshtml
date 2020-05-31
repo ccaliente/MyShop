@@ -38,8 +38,7 @@
 
             var minPrice = document.getElementById('slider-range-value1').innerHTML;
             var maxPrice = document.getElementById('slider-range-value2').innerHTML;
-                console.log(minPrice);
-                console.log(maxPrice);
+
             GetData(minPrice, maxPrice);
 
         });
@@ -49,8 +48,12 @@
              $.ajax({
                  url: '@Url.Action("FilterProducts", "Home")',
                  data: {
+                     page: '@Model.Page',
+                     pagesize: '@Model.PageSize',
                      minPrice: minPrice,
-                     maxPrice: maxPrice
+                     maxPrice: maxPrice,
+                     Category: '@Model.Category',
+                     Search: '@Model.Search'
                  }
              })
              .done(function (result) {
@@ -115,18 +118,11 @@
         <div class="col-md-12">
             @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { id = "pageSizeForm" }))
             {
-                @*<div class="col-md-2 col-sm-12">
-                        @Html.Label("Elements in page")
-                    </div>
-                    <div class="col-md-2 col-sm-12">
-                        @Html.DropDownList("pageSize")
-                    </div>*@
 
                 <div class="col-md-11 col-sm-12">
                     @Html.TextBox("Search", ViewBag.FilterValue as string, new { @class = "form-control" })
                 </div>
                 <div class="col-md-1 col-sm-12">
-                    @*<input type="submit" value="Search" />*@
                     <button type="submit" class="btn btn-primary" value="Search"><span class="glyphicon glyphicon-search"></span></button>
                 </div>
             }
@@ -144,6 +140,7 @@
                 filterProdViewModel.Products = Model.Products;
                 Html.RenderPartial("FilterProducts", filterProdViewModel);
              }
+            @*///////////////*@
             @*@foreach (var item in Model.Products)
             {
 
@@ -155,8 +152,9 @@
                         <a href="@Url.Action("AddToBasket", "Basket", new{Id=item.Id})" class="btn btn-primary">Add To Basket</a>
                     </div>
                 </div>
-            }
-            <div class="col-md-12">
+            }*@
+            @*//////////////*@
+            @*<div class="col-md-12">
                 Page: @(Model.Products.PageCount < Model.Products.PageNumber ? 0 : Model.Products.PageNumber)/@Model.Products.PageCount
 
                 @Html.PagedListPager(Model.Products, page => Url.Action("Index",

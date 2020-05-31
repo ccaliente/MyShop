@@ -15,6 +15,7 @@ namespace MyShop.Core.Models
         [DisplayName("Product Name")]
         [Required(ErrorMessage = "Please fill product name")]
         public string Name { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         [Range(0,1000)]
         public decimal Price { get; set; }
