@@ -35,12 +35,31 @@
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
+                        @*<div class="col-md-2">
+                            @Html.DropDownListFor(modelItem => item.Quantity, Enumerable.Range(1, 20).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new { @class = "form-control", @id = "Quantity" })
+                        </div>*@
                         @Html.DisplayFor(modelItem => item.Quantity)
                     </td>
                     <td>
                         @String.Format("{0:c}", item.Price)
                     </td>
                     <td>
+                        
+                            @*<script>
+                                $('#Quantity').change(function(){
+                                    var qty = $(this).val();
+                                    var result = @item.Price * qty;
+                                    console.log(result);
+                                     $("#partialdiv").val(result);
+                                })
+                            </script>*@
+                        @*<div id="partialdiv">*@
+
+                            @*@{
+
+                                Html.RenderAction("RowSummaryPartial", "Basket", new { Quantity = item.Quantity, Price = item.Price });
+                            }*@
+                        @*</div>*@
                         @String.Format("{0:c}", item.Price * item.Quantity)
                     </td>
                     <td>
@@ -53,7 +72,7 @@
                 <td>
                     @String.Format("{0:c}", (from m in Model select m.Price * m.Quantity).Sum());
                 </td>
-                <td><a href="@Url.Action("CheckOut", "Basket")">Checkout</a></td>
+                <td><a href="@Url.Action("CheckOut", "Basket")" class="btn btn-success">Checkout</a></td>
             </tr>
         </table>
     </div>

@@ -1,5 +1,6 @@
 ﻿using MyShop.Core.Contracts;
 using MyShop.Core.Models;
+using MyShop.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,13 +26,18 @@ namespace MyShop.UI.Controllers
         public ActionResult Index()
         {
             var model = basketService.GetBasketItems(this.HttpContext);
-            return View(model);
+            //if (model != null && model.Count !=0)
+                return View(model);
+            //else
+            //    return RedirectToAction("Index", "Home");
+
         }
 
-        public ActionResult AddToBasket(string Id)
+        public ActionResult AddToBasket(string Id, int Quantity) 
         {
-            basketService.AddToBasket(this.HttpContext, Id);
-            return RedirectToAction("Index");
+
+            basketService.AddToBasket(this.HttpContext, Id, Quantity); 
+            return RedirectToAction("Index"); 
         }
 
         public ActionResult RemoveFromBasket(string Id)
@@ -44,6 +50,12 @@ namespace MyShop.UI.Controllers
         {
             var BasketSummary = basketService.GetBasketSummary(this.HttpContext);
             return PartialView(BasketSummary);
+        }
+
+        public PartialViewResult RowSummaryPartial(int Quantity, decimal Price)
+        {
+            RowSummaryViewModel rv = new RowSummaryViewModel(Quantity, Price, Quantity*Price);
+            return PartialView(rv);
         }
 
         [Authorize]

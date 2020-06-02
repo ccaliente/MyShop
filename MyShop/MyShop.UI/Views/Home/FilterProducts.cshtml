@@ -3,7 +3,19 @@
 @using PagedList;
 @section Scripts{
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    @*<script type="text/javascript">
+        $('#red').click(function() {
+            function redBasket(Id) {
+            var qty = $("#Idqty").val();
+            console.log(qty);
+            var url = '@Url.Action("AddToBasket", "Basket", new { Id = "_id_", quantity = "_qty_"})';
+            window.location.href = url.replace('_id_', Id);
+             window.location.href = url.replace('_qty_', qty);
+            };
+        });
+    </script>*@
 }
+
 <div id="partialcont">
     @foreach (var item in Model.Products)
     {
@@ -12,8 +24,16 @@
             <img class="card-img-top" style=" max-width:100%; height:200px;" src="~/Content/ProductImages/@item.Image" />
             <div class="card-body">
                 <h5 class="card-title"><strong>@Html.ActionLink(item.Name, "Details", new { Id = item.Id })</strong></h5>
-                <p class="card-text"><h4>@item.Price</h4></p>
-                <a href="@Url.Action("AddToBasket", "Basket", new{Id=item.Id})" class="btn btn-primary">Add To Basket</a>
+                <div class="col-md-8">
+                    <h4>@item.Price</h4>
+                </div>
+                <div class="col-md-4" style="margin: 0px; padding: 0px;">
+                    @Html.DropDownList("QuantityList", Enumerable.Range(1, 20).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new { @class = "form-control", @onchange = "AddQuantity(this.value)", @id = "Idqty"+item.Id })
+                </div>
+                <div class="col-md-12">
+                    <a class="btn btn-primary btn-block" onclick="RedBasket('@item.Id')" >Add To Basket</a>
+                </div>
+                @*<a href="@Url.Action("AddToBasket", "Basket", new{Id=item.Id, })" class="btn btn-primary">Add To Basket</a>*@
             </div>
         </div>
     }
@@ -25,3 +45,14 @@
     </div>
 
 </div>
+<script>
+    function RedBasket(id) {
+            var e = document.getElementById( "Idqty"+id );
+			var result = e.options[e.selectedIndex].value;
+
+            var url = '@Html.Raw(Url.Action("AddToBasket", "Basket", new { Id = "_id_", Quantity= "_qty_"}))';
+            var params = url.replace('_id_', id).replace('_qty_', result);
+            window.location.href = params;
+
+     }
+</script>

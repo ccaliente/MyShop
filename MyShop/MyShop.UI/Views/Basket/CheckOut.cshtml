@@ -3,13 +3,14 @@
 <div class="">
 
 </div>
-<div class="container">
-    <h2>Order Data</h2>
+@*<div class="container">*@
+<div class="col-md-12" style="background-color: white; padding-top: 20px; padding-bottom: 20px; border-radius: 3px; color: #006699; ">
+    <h2 >Order Data</h2>
     <div class="panel-group" id="accordion">
         <div class="panel panel-default">
-            <div class="panel-heading" style=" background-color:darkturquoise">
+            <div class="panel-heading" style="background-color: #ffc107;">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" style= "font-weight: bold" data-parent="#accordion" href="#collapse1">User Data</a>
+                    <a data-toggle="collapse" style="font-weight: bold; color: #006699;" data-parent="#accordion" href="#collapse1">User Data</a>
                 </h4>
             </div>
             <div id="collapse1" class="panel-collapse collapse in">
@@ -20,7 +21,7 @@
 
                         <div class="form-horizontal">
                             @*<h4>Order</h4>
-                            <hr />*@
+                                <hr />*@
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                             <div class="form-group">
@@ -81,7 +82,7 @@
 
                             <div class="form-group">
                                 <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Proceed To Payment" class="btn btn-default" />
+                                    <input type="submit" value="Proceed To Payment" class="btn btn-primary" />
                                 </div>
                             </div>
                         </div>
@@ -90,9 +91,9 @@
             </div>
         </div>
         <div class="panel panel-default">
-            <div class="panel-heading" style=" background-color:darkturquoise">
+            <div class="panel-heading" style=" background-color:  #ffc107; ">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" style= "font-weight: bold" data-parent="#accordion" href="#collapse2">Payment</a>
+                    <a data-toggle="collapse" style="font-weight: bold; color: #006699;" data-parent="#accordion" href="#collapse2">Payment</a>
                 </h4>
             </div>
             <div id="collapse2" class="panel-collapse collapse">
@@ -104,9 +105,9 @@
             </div>
         </div>
         <div class="panel panel-default">
-            <div class="panel-heading" style=" background-color:darkturquoise">
+            <div class="panel-heading" style=" background-color:  #ffc107; ">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" style= "font-weight: bold" data-parent="#accordion" href="#collapse3">Invoice Data</a>
+                    <a data-toggle="collapse" style="font-weight: bold; color: #006699;" data-parent="#accordion" href="#collapse3">Invoice Data</a>
                 </h4>
             </div>
             <div id="collapse3" class="panel-collapse collapse">
@@ -118,11 +119,11 @@
             </div>
         </div>
     </div>
+    <div>
+        @Html.ActionLink("Back to Basket", "Index")
+    </div>
 </div>
 
-<!--Accordion wrapper-->
 
 
-<div>
-    @Html.ActionLink("Back to Basket", "Index")
-</div>
+
