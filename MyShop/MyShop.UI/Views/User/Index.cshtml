@@ -1,41 +1,60 @@
-﻿@model MyShop.Core.Models.Customer
-
+﻿@using MyShop.UI.Code
+@model MyShop.Core.ViewModels.UserViewModel
+@*@model MyShop.Core.Models.Customer*@
 @{
     ViewBag.Title = "Index";
 }
-
-    <div class="col-md-12" style="background-color:  #ffc107; color: #006699; margin-top: 20px; margin-bottom: 20px; border-radius: 3px;">
-        <div class="col-md-3" style="margin-top: 25px; margin-bottom: 5px;">
-            <div class="list-group" style="font-weight: bold;">
-                <div class="list-group-item" onclick="LoadUserData()">User Data</div>
-                <div class="list-group-item" onclick="LoadOrders()">Orders</div>
-                <div class="list-group-item" >Invoice Data</div>
-                <div class="list-group-item" >Payment Data</div>
-            </div>
-        </div>
-        <div class="col-md-9 container rounded" style="border: 1px solid #cecece; border-radius: 3px; color: #31708f; background-color: white; margin-top: 25px; margin-bottom: 25px;" id="userdiv">
+@section Scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}
+<div class="col-md-12" style="background-color:  #ffc107; color: #006699; margin-top: 20px; margin-bottom: 20px; border-radius: 3px;">
+    <div class="col-md-3" style="margin-top: 25px; margin-bottom: 5px;">
+        <div class="list-group" style="font-weight: bold;">
+            <a class="@(Model.SortBy != null ? Model.SortBy == "User" ? "list-group-item active" : "list-group-item" : "list-group-item")" href="@Url.Action("Index","User", new { listChoice = ChoosedListItem.User.ToString()})">User Data</a>
+            <a class="@(Model.SortBy != null ? Model.SortBy == "Order" ? "list-group-item active" : "list-group-item" : "list-group-item")" href="@Url.Action("Index","User", new { listChoice = ChoosedListItem.Order.ToString()})">Orders</a>
+            @*<div class="list-group-item" onclick="LoadUserData()" >User Data</div>*@
+            @*<div class="list-group-item" onclick="LoadOrders()">Orders</div>*@
+            <div class="list-group-item">Invoice Data</div>
         </div>
     </div>
+    <div class="col-md-9 container rounded" style="border: 1px solid #cecece; border-radius: 3px; color: #31708f; background-color: white; margin-top: 25px; margin-bottom: 25px;" id="userdiv">
+        @{
+            string ch = Model.SortBy.Trim();
+
+            switch (ch)
+            {
+                case "User":
+                    Html.RenderPartial("UserPartial", Model.Cust);
+                    break;
+                case "Order":
+                    Html.RenderPartial("UserOrderPartial", Model.UserOrders);
+                    break;
+            }
+
+            }
+    </div>
+</div>
 
 <script>
-     function LoadUserData() {
+     @*function LoadUserData() {
             $.ajax({
-                    type : 'Get' ,
+                type : 'Get' ,
                     url: '@Url.Action("UserPartial","User")',
                     contentType: "text/html; charset=utf-8",
                     success: function (data) {
                     $('#userdiv').html(data);
                     }
-                    });
-    }
-     function LoadOrders() {
+                });
+
+            }*@
+     @*function LoadOrders() {
             $.ajax({
-                    type : 'Get' ,
+                type : 'Get' ,
                     url: '@Url.Action("UserOrderPartial","User")',
                     contentType: "text/html; charset=utf-8",
                     success: function (data) {
                     $('#userdiv').html(data);
                     }
-                    });
-            }
+                });
+            }*@
 </script>

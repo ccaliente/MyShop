@@ -91,6 +91,8 @@ namespace MyShop.UI.Controllers
             order.Email = User.Identity.Name;
 
             ///payment procces//
+
+            ////////////////////
             order.OrderStatus = "Order Processed";
             orderService.CreateOrder(order, basketItems);
             basketService.ClearBasket(this.HttpContext);

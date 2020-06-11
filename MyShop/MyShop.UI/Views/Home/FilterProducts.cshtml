@@ -3,17 +3,6 @@
 @using PagedList;
 @section Scripts{
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-    @*<script type="text/javascript">
-        $('#red').click(function() {
-            function redBasket(Id) {
-            var qty = $("#Idqty").val();
-            console.log(qty);
-            var url = '@Url.Action("AddToBasket", "Basket", new { Id = "_id_", quantity = "_qty_"})';
-            window.location.href = url.replace('_id_', Id);
-             window.location.href = url.replace('_qty_', qty);
-            };
-        });
-    </script>*@
 }
 
 <div id="partialcont">

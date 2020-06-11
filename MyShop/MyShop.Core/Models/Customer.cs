@@ -10,19 +10,20 @@ namespace MyShop.Core.Models
     public class Customer : BaseEntity
     {
         public string UserId { get; set; }
-        //[Required(ErrorMessage = "Please fill first name")]
+        [Required(ErrorMessage = "Please fill first name")]
         public string FirstName { get; set; }
-        //[Required(ErrorMessage = "Please fill last name")]
+        [Required(ErrorMessage = "Please fill last name")]
         public string LastName { get; set; }
-        //[Required(ErrorMessage = "Please fill Email")]
+        [Required(ErrorMessage = "Please fill Email")]
         public string Email { get; set; }
-        //[Required(ErrorMessage = "Please fill Street")]
+        [Required(ErrorMessage = "Please fill Street")]
         public string Street { get; set; }
-        //[Required(ErrorMessage = "Please fill City")]
+        [Required(ErrorMessage = "Please fill City")]
         public string City { get; set; }
-        //[Required(ErrorMessage = "Please fill Country")]
+        [Required(ErrorMessage = "Please fill Country")]
         public string Country { get; set; }
         public string ZipCode { get; set; }
+        [Required(ErrorMessage = "Please fill your phone number")]
         public string Phone { get; set; }
         //public virtual InvoiceData Invoice { get; set; }
 

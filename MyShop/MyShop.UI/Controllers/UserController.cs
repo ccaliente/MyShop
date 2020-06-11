@@ -1,5 +1,6 @@
 ﻿using MyShop.Core.Contracts;
 using MyShop.Core.Models;
+using MyShop.Core.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -27,28 +28,44 @@ namespace MyShop.UI.Controllers
         }
 
         // GET: User
-        public ActionResult Index()
+        public ActionResult Index(string listChoice = null)
         {
-            Customer customer = contextC.Collection().FirstOrDefault(c => c.Email == User.Identity.Name);
-            return View(customer);
+            UserViewModel vm = new UserViewModel();
+            vm.Cust = contextC.Collection().FirstOrDefault(c => c.Email == User.Identity.Name);
+            vm.UserOrders = contextOrder.Collection().Where(o => o.Email == User.Identity.Name);
+            if (listChoice == null)
+                listChoice = "User";
+            vm.SortBy = listChoice;
+                
+            return View(vm);
+
         }
 
         [HttpGet]
         public PartialViewResult UserPartial()
         {
             Customer customer = contextC.Collection().FirstOrDefault(c => c.Email == User.Identity.Name);
-            return PartialView("UserPartial", customer);
+            return PartialView("UserPartial");
         }
+
+        //[HttpGet]
+        //public PartialViewResult UserPartial() 
+        //{ 
+        //    Customer customer = contextC.Collection().FirstOrDefault(c => c.Email == User.Identity.Name);
+        //    return PartialView("UserPartial", customer);
+        //}
 
         [HttpPost]
         public ActionResult UserPartial(Customer user, HttpPostedFileBase file)
         {
             bool status = false;
+
             if (ModelState.IsValid)
             {
                 Customer u = contextC.Find(user.Id);
                 u.City =  user.City;
                 u.Country = user.Country;
+                u.Email = user.Email;
                 u.FirstName = user.FirstName;
                 u.LastName = user.LastName;
                 u.Phone = user.Phone;
@@ -69,15 +86,21 @@ namespace MyShop.UI.Controllers
         {
             List<Order> data = orderService.GetOrderList();
             return PartialView("UserOrderPartial", data.Where(o => o.Email == User.Identity.Name));
-            //return Json(new { data = data }, JsonRequestBehavior.AllowGet);
         }
+
+        //[HttpGet]
+        //public ActionResult UserOrderPartial(string listId)
+        //{
+        //    List<Order> data = orderService.GetOrderList();
+        //    return PartialView("UserOrderPartial", data.Where(o => o.Email == User.Identity.Name));
+        //}
 
         [HttpPost]
         public JsonResult Delete(string Id)
         {
             Order or = contextOrder.Find(Id);
 
-            if (or.OrderStatus != "Order Shipped")
+            if (or.OrderStatus != "Order Shipped"  && or.OrderStatus != "Order Complete")
             {
                 orderService.DeleteOrder(Id);
                 orderService.GetOrderList().Where(o => o.Email == User.Identity.Name);

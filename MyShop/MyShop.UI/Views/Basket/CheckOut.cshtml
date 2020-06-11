@@ -1,128 +1,151 @@
 ﻿@model MyShop.Core.Models.Order
 
-<div class="">
-
-</div>
 @*<div class="container">*@
-<div class="col-md-12" style="background-color: white; padding-top: 20px; padding-bottom: 20px; border-radius: 3px; color: #006699; ">
-    <h2 >Order Data</h2>
-    <div class="panel-group" id="accordion">
-        <div class="panel panel-default">
-            <div class="panel-heading" style="background-color: #ffc107;">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" style="font-weight: bold; color: #006699;" data-parent="#accordion" href="#collapse1">User Data</a>
-                </h4>
-            </div>
-            <div id="collapse1" class="panel-collapse collapse in">
-                <div class="panel-body">
-                    @using (Html.BeginForm())
-                    {
-                        @Html.AntiForgeryToken()
+    <div class="col-md-12" style="background-color: white; padding-top: 20px; padding-bottom: 20px; border-radius: 3px; color: #006699; ">
+        <h2>Order Data</h2>
+        <div class="panel-body">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-                        <div class="form-horizontal">
-                            @*<h4>Order</h4>
-                                <hr />*@
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-                                </div>
+               <div class="form-horizontal">
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style="background-color: #ffc107;">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" style="font-weight: bold; color: #006699;" data-parent="#accordion" href="#collapse1">User Data</a>
+                                </h4>
                             </div>
+                            <div id="collapse1" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    @*@using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()*@
 
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                                    @*<div class="form-horizontal">*@
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Street, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Street, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Street, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
 
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
 
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Street, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Street, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Street, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
 
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.ZipCode, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
 
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
 
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Proceed To Payment" class="btn btn-primary" />
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ZipCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    }
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading" style=" background-color:  #ffc107; ">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" style="font-weight: bold; color: #006699;" data-parent="#accordion" href="#collapse2">Payment</a>
-                </h4>
-            </div>
-            <div id="collapse2" class="panel-collapse collapse">
-                <div class="panel-body">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading" style=" background-color:  #ffc107; ">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" style="font-weight: bold; color: #006699;" data-parent="#accordion" href="#collapse3">Invoice Data</a>
-                </h4>
-            </div>
-            <div id="collapse3" class="panel-collapse collapse">
-                <div class="panel-body">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-            </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style=" background-color:  #ffc107; ">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" style="font-weight: bold; color: #006699;" data-parent="#accordion" href="#collapse2">Payment and Delivery</a>
+                                </h4>
+                            </div>
+                            <div id="collapse2" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <div class="col-md-2 control-label" style="font-weight: bold;">Payment Type</div>
+                                        <div class="col-md-3">
+                                            <div class="col-md-12">
+                                                @Html.LabelFor(model => model.PaymentType, "In Cash", htmlAttributes: new { @class = "control-label col-md-5", @checked = true, @name="payment" })
+                                                <div class="col-xs-1" style="padding-left: 1px; padding-right: 1px;">
+                                                    @Html.RadioButtonFor(model => model.PaymentType, 1)
+                                                </div>
+                                                @Html.LabelFor(model => model.PaymentType, "Pay now", htmlAttributes: new { @class = "control-label col-md-5", @name="payment" })
+                                                <div class="col-xs-1 " style="padding-left: 1px; padding-right: 1px;">
+                                                    @Html.RadioButtonFor(model => model.PaymentType, 2)
+                                                </div>
+                                            </div>
+                                            @Html.ValidationMessageFor(model => model.PaymentType, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-2 control-label" style="font-weight: bold;">Delivery Type</div>
+                                        <div class="col-md-3">
+                                            <div class="col-md-12">
+                                                @Html.LabelFor(model => model.DeliveryType, "To Home", htmlAttributes: new { @class = "control-label col-md-5", @name="delivery" })
+                                                <div class="col-xs-1" style="padding-left: 1px; padding-right: 1px;">
+                                                    @Html.RadioButtonFor(model => model.DeliveryType, "To Home")
+                                                </div>
+                                                @Html.LabelFor(model => model.DeliveryType, "To Office", htmlAttributes: new { @class = "control-label col-md-5", @name="delivery" })
+                                                <div class="col-xs-1 " style="padding-left: 1px; padding-right: 1px;">
+                                                    @Html.RadioButtonFor(model => model.DeliveryType, "To Supplier office")
+                                                </div>
+                                            </div>
+                                            @Html.ValidationMessageFor(model => model.DeliveryType, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                            @Html.LabelFor(model => model.DeliveryOffice, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.DeliveryOffice, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.DeliveryOffice, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-10 col-md-10">
+                            <input type="submit" value="Proceed To Payment" class="btn btn-primary" />
+                        </div>
+                    </div>
+               </div>
+
+            }
         </div>
     </div>
-    <div>
-        @Html.ActionLink("Back to Basket", "Index")
-    </div>
-</div>
 
 
 

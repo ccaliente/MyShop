@@ -30,7 +30,8 @@ namespace MyShop.Services
                     ProductName = item.Name,
                     Price = item.Price,
                     Image = item.Image,
-                    Quantity = item.Quantity
+                    Quantity = item.Quantity,
+                    
                 });
             }
 

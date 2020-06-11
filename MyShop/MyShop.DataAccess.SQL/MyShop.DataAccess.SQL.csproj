@@ -52,6 +52,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContext.cs" />
+    <Compile Include="Migrations\202006111148098_initial.cs" />
+    <Compile Include="Migrations\202006111148098_initial.designer.cs">
+      <DependentUpon>202006111148098_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006111223337_OrderDeliveryType.cs" />
+    <Compile Include="Migrations\202006111223337_OrderDeliveryType.designer.cs">
+      <DependentUpon>202006111223337_OrderDeliveryType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006111334417_DeliveryTypeChange.cs" />
+    <Compile Include="Migrations\202006111334417_DeliveryTypeChange.designer.cs">
+      <DependentUpon>202006111334417_DeliveryTypeChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLRepository.cs" />
@@ -65,6 +77,17 @@
       <Project>{053EE349-DCBF-40D0-85A9-D9CBCFF5107F}</Project>
       <Name>MyShop.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202006111148098_initial.resx">
+      <DependentUpon>202006111148098_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006111223337_OrderDeliveryType.resx">
+      <DependentUpon>202006111223337_OrderDeliveryType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006111334417_DeliveryTypeChange.resx">
+      <DependentUpon>202006111334417_DeliveryTypeChange.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

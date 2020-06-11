@@ -1,6 +1,6 @@
 ﻿@model MyShop.Core.Models.Order
 
-    <div class="col-md-12" style="background-color:#d9edf7; margin-top: 20px; margin-bottom: 20px; border-radius: 3px;">
+    <div class="col-md-12" style="background-color:  #ffc107; color: #006699; margin-top: 20px; margin-bottom: 20px; border-radius: 3px;">
         <div class="col-md-12 container rounded" style="border: 1px solid #cecece; border-radius: 3px; color: #31708f; background-color: white; margin-top: 25px; margin-bottom: 25px;" id="userdiv">
             @using (Html.BeginForm())
             {
@@ -90,10 +90,11 @@
                 </div>
                 @Html.Partial("OrderItems", Model.OrderItems)
             }
-            </div>
         </div>
         <div>
             @Html.ActionLink("Back to List", "Index")
         </div>
+    </div>
+
 
      
